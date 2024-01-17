@@ -25,6 +25,8 @@ export const GlobalStyle = createGlobalStyle`
 
  a {
     color: ${props => props.theme['blue-300']};
+    font-weight: 700;
+    cursor: pointer;
 
         &:hover {
             text-decoration: underline;
