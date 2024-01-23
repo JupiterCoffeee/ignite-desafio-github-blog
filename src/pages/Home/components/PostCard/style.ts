@@ -5,6 +5,7 @@ export const PostCardContainer = styled.div`
     flex-direction: column;
     gap: 1.25rem;
     padding: 2rem;
+    height: 16.25rem;
 
     background-color: ${props => props.theme['dark-blue-600']};
     border-radius: 0.625rem;

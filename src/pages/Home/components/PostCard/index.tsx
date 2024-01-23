@@ -1,17 +1,20 @@
 import { PostCardContainer } from "./style";
 
-export function PostCard() {
+export interface Issue {
+    title: string;
+    body: string;
+  }
+
+export function PostCard({ title, body } : Issue) {
     return (
         <PostCardContainer>
             <header>
-                <h4>JavaScript Data types and data structures</h4>
+                <h4>{title}</h4>
                 <span>Há 1 dia</span>
             </header>
             <div>
                 <p>
-                    Programming languages all have built-in data structures, 
-                    but these often differ from one language to another. 
-                    This article attempts to list the built-in data structures available in... 
+                    {body}
                 </p>
             </div>
         </PostCardContainer>

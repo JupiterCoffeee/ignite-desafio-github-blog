@@ -1,7 +1,7 @@
 import { ArrowSquareOut, Buildings, GithubLogo, Users } from "phosphor-react";
 import { ProfileCardHeader, ProfileCardContainer, ProfileCardContentDiv, ProfileCardPictureDiv, ProfileCardStats } from "./style";
-import axios from "axios";
 import { useEffect, useState } from "react";
+import { api, token } from "../../../../lib/axios";
 
 interface ProfileCardProps {
     name: string;
@@ -13,7 +13,6 @@ interface ProfileCardProps {
     bio: string;
 }
 
-
 export function ProfileCard() {
     const [profile, setProfile] = useState<ProfileCardProps>({
         name: '',
@@ -24,34 +23,36 @@ export function ProfileCard() {
         followers: 0,
         bio: '',
     });
-    const apiUrl = 'https://api.github.com';
 
-    const fetchUserInfo = async () => {
-        const username = 'JupiterCoffee';
+    const fetchUserInfo = async (username: string) => {
         try {
-            const response = await axios.get(`${apiUrl}/users/${username}`)
+
+            const response = await api.get(`users/${username}`, {
+                headers: {
+                  Authorization: `Bearer ${token}`,
+                },
+              });
+
             const userData = response.data;
             const userInfo: ProfileCardProps = {
-                name: userData.name,
-                url: userData.html_url,
-                picture: userData.avatar_url,
-                login: userData.login,
+                bio: userData.bio,
                 company: userData.company,
                 followers: userData.followers,
-                bio: userData.bio,
+                login: userData.login,
+                name: userData.name,
+                picture: userData.avatar_url,
+                url: userData.html_url,
             }
 
             setProfile(userInfo)
         } catch (error) {
-            console.error('Erro ao buscar usuário:', axios.isAxiosError(error))
+            console.error('Erro ao buscar usuário:', error.message)
         }
     };
 
     useEffect(() => {
-        fetchUserInfo()
+        fetchUserInfo('JupiterCoffeee')
     }, [])
-
-    console.log(profile)
       
     return (
         <ProfileCardContainer>
@@ -61,7 +62,7 @@ export function ProfileCard() {
             <ProfileCardContentDiv>
                 <ProfileCardHeader>
                     <div>
-                        <span>João Fialho</span>
+                        <span>{profile.login}</span>
                         <a href={profile.url}>
                             GITHUB
                             <ArrowSquareOut weight="bold"/>
@@ -76,7 +77,7 @@ export function ProfileCard() {
                 <ProfileCardStats>
                     <span>
                         <GithubLogo weight="fill"/>
-                        <p>{profile.login}</p>
+                        <p>{profile.name}</p>
                     </span>
                     <span>
                         <Buildings weight="fill"/>
