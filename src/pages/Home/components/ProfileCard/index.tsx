@@ -24,33 +24,33 @@ export function ProfileCard() {
         bio: '',
     });
 
-    const fetchUserInfo = async (username: string) => {
-        try {
-
-            const response = await api.get(`users/${username}`, {
-                headers: {
-                  Authorization: `Bearer ${token}`,
-                },
-              });
-
-            const userData = response.data;
-            const userInfo: ProfileCardProps = {
-                bio: userData.bio,
-                company: userData.company,
-                followers: userData.followers,
-                login: userData.login,
-                name: userData.name,
-                picture: userData.avatar_url,
-                url: userData.html_url,
-            }
-
-            setProfile(userInfo)
-        } catch (error) {
-            console.error('Erro ao buscar usuário:', error.message)
-        }
-    };
-
     useEffect(() => {
+        const fetchUserInfo = async (username: string) => {
+            try {
+    
+                const response = await api.get(`users/${username}`, {
+                    headers: {
+                      Authorization: `Bearer ${token}`,
+                    },
+                  });
+    
+                const userData = response.data;
+                const userInfo: ProfileCardProps = {
+                    bio: userData.bio,
+                    company: userData.company,
+                    followers: userData.followers,
+                    login: userData.login,
+                    name: userData.name,
+                    picture: userData.avatar_url,
+                    url: userData.html_url,
+                }
+    
+                setProfile(userInfo)
+            } catch (error) {
+                console.error('Erro ao buscar usuário:', error.message)
+            }
+        };
+
         fetchUserInfo('JupiterCoffeee')
     }, [])
       

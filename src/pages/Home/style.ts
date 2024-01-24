@@ -12,6 +12,7 @@ export const HomeContent = styled.main`
     width: 100%;
     max-width: 54rem;
     margin: 0 auto;
+    margin-bottom: 2rem;
 `;
 
 export const HomeCardsContainer = styled.section`

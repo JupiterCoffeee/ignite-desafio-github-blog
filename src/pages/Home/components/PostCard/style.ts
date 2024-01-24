@@ -9,6 +9,7 @@ export const PostCardContainer = styled.div`
 
     background-color: ${props => props.theme['dark-blue-600']};
     border-radius: 0.625rem;
+    cursor: pointer;
 
     header {
         display: flex;
@@ -26,6 +27,10 @@ export const PostCardContainer = styled.div`
             font-size: 0.875rem;
             margin-top: 5px;
         }
+    }
+
+    div {
+        overflow: hidden;
     }
 
     &:hover {
