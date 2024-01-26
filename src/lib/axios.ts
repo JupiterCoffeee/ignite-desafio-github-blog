@@ -4,4 +4,4 @@ export const api = axios.create({
     baseURL: 'https://api.github.com',
 })
 
-export const token = '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'
+export const token = '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'
