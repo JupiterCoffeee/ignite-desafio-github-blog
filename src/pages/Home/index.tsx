@@ -1,41 +1,15 @@
-import { useEffect, useState } from "react";
-import { Issue, PostCard } from "./components/PostCard";
+
+import { useContext } from "react";
+import { PostCard } from "./components/PostCard";
 import { ProfileCard } from "./components/ProfileCard";
 import { SearchForm } from "./components/SearchForm";
 import { HomeCardsContainer, HomeContainer, HomeContent } from "./style";
-import { api } from "../../lib/axios";
+import { IssuesContext } from "../../context/IssueContext";
+import { Link } from "react-router-dom";
 
 export function Home() {
-
-    const [issues, setIssues] = useState<Issue[]>([])
+    const { issues, fetchIssues } = useContext(IssuesContext)
     
-    const fetchIssues = async (username: string, repo: string, query?: string) => {
-        try {
-            let url = `search/issues?q=repo:${username}/${repo}`;
-
-            if (query) {
-                url += `%20${query}`;
-            }
-
-            const response = await api.get(url)
-            const issuesData = response.data.items;
-            const formattedIssues: Issue[] = issuesData.map((issue: any) => ({
-                title: issue.title,
-                body: issue.body,
-                id: issue.id
-            }));
-
-            setIssues(formattedIssues)
-            console.log(url)
-        } catch (error) {
-            console.error('Erro ao buscar issues:', error.message)
-        }
-    }
-
-    useEffect(() => {
-        fetchIssues('JupiterCoffeee', 'ignite-desafio-github-blog')
-    }, [])
-
     const issuesListLength = issues.length
 
     return (
@@ -47,13 +21,14 @@ export function Home() {
                     fetchIssues={fetchIssues}
                 />
                 <HomeCardsContainer>
-                    {issues.map(issue => {
+                    {issues.map((issue, index) => {
                         return (
-                            <PostCard
-                                key={issue.id} 
-                                title={issue.title}
-                                body={issue.body}
-                            />
+                            <Link to={`/${issue.id.toString()}`} key={index} >
+                                <PostCard
+                                    title={issue.title}
+                                    body={issue.body}
+                                />
+                            </Link>
                         )
                     })}
                 </HomeCardsContainer>

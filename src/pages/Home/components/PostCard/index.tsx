@@ -1,6 +1,6 @@
 import { PostCardContainer } from "./style";
 
-export interface Issue {
+interface Issue {
     title: string;
     body: string;
   }
