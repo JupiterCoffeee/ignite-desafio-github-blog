@@ -26,12 +26,10 @@ Bem-vindo ao meu Blog Pessoal desenvolvido com ReactJS e integrado à API do Git
    ```bash
    git clone https://github.com/JupiterCoffeee/ignite-desafio-github-blog.git
    cd ignite-desafio-github-blog
-   ```
 
 2. **Instale as dependências:**
    ```bash
-  npm i
-  ```
+  npm install --save ignite-desafio-github-blog
 
 3. **Configure a API do GitHub:**
 
