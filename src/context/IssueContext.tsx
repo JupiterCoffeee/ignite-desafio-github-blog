@@ -42,8 +42,8 @@ export function IssueProvider({ children }: IssuesProviderProps) {
   const [issues, setIssues] = useState<Issue[]>([]);
 
   // Informações fixas do username e repo
-  const username = 'JupiterCoffeee';
-  const repo = 'ignite-desafio-github-blog';
+  const username = 'YOUR_NAME';
+  const repo = 'YOUR_REPOSITORY';
 
   return (
     <IssuesContext.Provider value={{ issues, setIssues, username, repo }}>
