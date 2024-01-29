@@ -19,4 +19,12 @@ export const HomeCardsContainer = styled.section`
     display: grid;
     grid-template-columns: repeat(2, 1fr);
     gap: 2rem;
+
+    a {
+        all: unset;
+
+        &:hover {
+            all: unset;
+        }
+    }
 `;

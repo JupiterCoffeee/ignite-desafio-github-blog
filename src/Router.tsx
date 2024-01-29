@@ -3,16 +3,9 @@ import { DefaultLayout } from "./styles/layouts/DefaultLayout";
 
 import { Home } from "./pages/Home";
 import { Post } from "./pages/Post";
-import { IssueProvider, IssuesContext } from "./context/IssueContext";
-import { useContext } from "react";
+import { IssueProvider } from "./context/IssueContext";
 
 export function Router() {
-    const { issues } = useContext(IssuesContext)
-    const issueRoutes = (issues && issues.map(issue => {
-        return issue.number
-    }))
-    console.log(issueRoutes)
-
     return (
         <IssueProvider>
             <Routes>
@@ -20,15 +13,10 @@ export function Router() {
                     <Route path="/" element={<Home />} />
                     <Route 
                         path=":id" 
-                        element={
-                        <Post 
-                            issueNumber={
-                                issueRoutes
-                            }/>
-                    }
-                    />
+                        element={<Post /> }/>
                 </Route>
             </Routes>
         </IssueProvider>
     );
+    
 }

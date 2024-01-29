@@ -1,64 +1,53 @@
-import { createContext, useEffect, useState } from "react";
-import { api } from "../lib/axios";
+import { createContext, useState, ReactNode } from "react";
 
+// Definição da interface para cada issue
 export interface Issue {
-    id: number;
-    title: string;
-    body: string;
-    number: number;
-    author: string;      // Adicionado autor fictício
-    comments: number;    // Adicionado número fictício de comentários
-    githubLink: string;  // Adicionado link fictício do GitHub
+  id: number;
+  title: string;
+  body: string;
+  number: number;
+  postedAt: string;
+  author: string;
+  comments: number;
+  githubLink: string;
 }
 
+// Definição da interface para os dados formatados de uma issue
+export interface FormattedIssue {
+  id: number;
+  title: string;
+  body: string;
+  number: number;
+  created_at: string;
+}
+
+// Definição do tipo para o contexto das issues
 interface IssueContextType {
-    issues: Issue[];
-    fetchIssues: (username: string, repo: string, query?: string) => Promise<void>;
+  issues: Issue[];
+  setIssues: React.Dispatch<React.SetStateAction<Issue[]>>;
+  username: string;
+  repo: string;
 }
 
+// Propriedades esperadas para o componente IssueProvider
 interface IssuesProviderProps {
-    children: ReactNode;
+  children: ReactNode;
 }
 
+// Contexto e provedor para gerenciar o estado das issues
 export const IssuesContext = createContext({} as IssueContextType);
 
 export function IssueProvider({ children }: IssuesProviderProps) {
-    const [issues, setIssues] = useState<Issue[]>([]);
+  // Estado para armazenar as issues
+  const [issues, setIssues] = useState<Issue[]>([]);
 
-    const fetchIssues = async (username: string, repo: string, query?: string) => {
-        try {
-            let url = `search/issues?q=repo:${username}/${repo}`;
+  // Informações fixas do username e repo
+  const username = 'JupiterCoffeee';
+  const repo = 'ignite-desafio-github-blog';
 
-            if (query) {
-                url += `%20${query}`;
-            }
-
-            const response = await api.get(url);
-            const issuesData = response.data.items;
-            const formattedIssues: Issue[] = issuesData.map((issue: any) => ({
-                id: issue.id,
-                title: issue.title,
-                body: issue.body,
-                number: issue.number,
-                author: "Cameron Wll",          // Valor fictício de autor
-                comments: Math.floor(Math.random() * 10),  // Número aleatório fictício de comentários
-                githubLink: issue.html_url,    // Link real do GitHub
-            }));
-
-            setIssues(formattedIssues);
-            console.log(url);
-        } catch (error) {
-            console.error('Erro ao buscar issues:', error.message);
-        }
-    };
-
-    useEffect(() => {
-        fetchIssues('JupiterCoffeee', 'ignite-desafio-github-blog');
-    }, []);
-
-    return (
-        <IssuesContext.Provider value={{ issues, fetchIssues }}>
-            {children}
-        </IssuesContext.Provider>
-    );
+  return (
+    <IssuesContext.Provider value={{ issues, setIssues, username, repo }}>
+      {children}
+    </IssuesContext.Provider>
+  );
 }

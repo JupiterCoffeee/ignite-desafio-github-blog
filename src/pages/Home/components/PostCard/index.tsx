@@ -1,16 +1,22 @@
+import { formatDistanceToNow } from "date-fns";
 import { PostCardContainer } from "./style";
+import { ptBR } from "date-fns/locale/pt-BR";
 
-interface Issue {
+interface PostCardProps {
     title: string;
     body: string;
+    postedAt: string;
   }
 
-export function PostCard({ title, body } : Issue) {
+export function PostCard({ title, body, postedAt } : PostCardProps) {
     return (
         <PostCardContainer>
             <header>
                 <h4>{title}</h4>
-                <span>Há 1 dia</span>
+                <span>{formatDistanceToNow(postedAt, {
+                    addSuffix: true,
+                    locale: ptBR
+                })}</span>
             </header>
             <div>
                 <p>
