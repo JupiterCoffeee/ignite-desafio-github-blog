@@ -6,6 +6,7 @@ import { Issue, IssuesContext } from "../../context/IssueContext";
 import { ptBR } from "date-fns/locale/pt-BR";
 import { formatDistanceToNow } from "date-fns";
 import { fetchData } from "../../hooks/useFetch";
+import Markdown from "react-markdown";
 
 export function Post() {
     // Obter o parâmetro da URL referente ao ID do problema
@@ -91,7 +92,9 @@ export function Post() {
                 </div>
             </PostHeader>
             <PostSection>
-                <p>{currentIssue.body}</p>
+                <Markdown>
+                  {currentIssue.body}
+                </Markdown>
             </PostSection>
         </PostContainer>
     );
