@@ -1,30 +1,50 @@
-# React + TypeScript + Vite
+# Blog Pessoal com ReactJS e API do GitHub
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Bem-vindo ao meu Blog Pessoal desenvolvido com ReactJS e integrado à API do GitHub. Esta aplicação permite listar e filtrar as issues de um repositório específico, além de exibir detalhes do perfil do usuário.
 
-Currently, two official plugins are available:
+## Funcionalidades
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+- **Listagem do Perfil:**
+  - Exibe informações do perfil do usuário, como imagem, número de seguidores, nome, etc.
 
-## Expanding the ESLint configuration
+- **Listagem de Issues:**
+  - Apresenta todas as issues do repositório com um resumo do conteúdo.
 
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
+- **Detalhes da Issue:**
+  - Permite visualizar o conteúdo completo de uma issue em uma página dedicada.
 
-- Configure the top-level `parserOptions` property like this:
+## Tecnologias Utilizadas
 
-```js
-export default {
-  // other rules...
-  parserOptions: {
-    ecmaVersion: 'latest',
-    sourceType: 'module',
-    project: ['./tsconfig.json', './tsconfig.node.json'],
-    tsconfigRootDir: __dirname,
-  },
-}
-```
+- ReactJS
+- React Router DOM
+- Axios para consumir a API do GitHub
+- Outras bibliotecas e ferramentas comuns em projetos React
 
-- Replace `plugin:@typescript-eslint/recommended` to `plugin:@typescript-eslint/recommended-type-checked` or `plugin:@typescript-eslint/strict-type-checked`
-- Optionally add `plugin:@typescript-eslint/stylistic-type-checked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and add `plugin:react/recommended` & `plugin:react/jsx-runtime` to the `extends` list
+## Como Usar
+
+1. **Clone o Repositório:**
+   ```bash
+   git clone https://github.com/JupiterCoffeee/ignite-desafio-github-blog.git
+   cd blog-pessoal-react-github
+
+2. **Instale as dependências:**
+   ```bash
+  npm install
+
+3. **Configure a API do GitHub:**
+
+- Renomeie o arquivo .env.example para .env.
+- Adicione sua chave de acesso à API do GitHub ao arquivo .env.
+
+4. **Substitua o Placeholder pelo Seu Token Pessoal:**
+- Abra o arquivo src/lib/axios.ts.
+- Substitua <SEU_TOKEN> pelo seu token pessoal do GitHub.
+
+5. **Insira Seu Próprio Usuário e Repositório no Context:**
+- Abra o arquivo src/context/IssueContext.tsx.
+- Substitua SEU_USUARIO pelo seu nome de usuário do GitHub.
+- Substitua SEU_REPO pelo nome do seu repositório.
+
+6. **Execute a Aplicação:**
+```bash
+npm run dev
